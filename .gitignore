@@ -1,0 +1,1 @@
+target/ *.class *.jar *.war *.log .idea/ .vscode/ *.swp .DS_Store .env .env.local
