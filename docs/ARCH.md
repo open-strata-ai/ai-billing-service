@@ -1,6 +1,6 @@
 # ai-billing-service · Architecture Decision Document (ARCH)
 
-> **Source**: Extracted from `design/DESIGN.md` §1, §2, §3, §6. Full design doc is the authority; this distillate captures architectural decisions, constraints, and SPI boundaries for implementers.
+> **Source**: Extracted from `docs/DESIGN.md` §1, §2, §3, §6. Full design doc is the authority; this distillate captures architectural decisions, constraints, and SPI boundaries for implementers.
 
 ---
 
@@ -12,7 +12,7 @@
 | Language / Framework | Java · Spring Boot 3.x (Jakarta Persistence) |
 | Optional | Yes — optional, **only multi-tenant**: enabled in advanced/full profiles |
 | Default Port | 8084 |
-| Platform Version | v1.4.0 |
+| Platform Version | v1.0.0 |
 | Deployment | 2 replicas (only advanced/full), `ai-system` namespace, 500m CPU / 1Gi request |
 | Database | PostgreSQL@16.0 (core base), schema `billing` |
 | Prerequisite | `multitenancy.enabled=true` (§12.4: `billing` → `multitenancy` → `auth`) |
@@ -60,7 +60,7 @@ billing → multitenancy → auth
 - **Inbound**: Consumes metering events/aggregated results (does NOT self-collect). Authenticated via `Auth` SPI (Keycloak).
 - **Out-of-scope (NEVER in this service)**: Token collection, model inference, external charge collection (internal transfer pricing only), prompt content storage.
 - **Outbound**: All external calls through SPI Ports. Notifies `ai-platform-api` for quota circuit-breaking.
-- **Money Precision**: All monetary amounts stored as `BIGINT` in smallest currency unit (分 for CNY). NEVER `FLOAT` or `DOUBLE`.
+- **Money Precision**: All monetary amounts stored as `BIGINT` in smallest currency unit (cents for CNY). NEVER `FLOAT` or `DOUBLE`.
 
 ---
 
@@ -123,7 +123,7 @@ DDD four-layer architecture. Scheduled aggregation (Spring `@Scheduled`, externa
 | `UsageRecord` | `RecordId` | tenantId, appId, model, dimension (enum), amount, occurredAt |
 | `Invoice` | `InvoiceId` | tenantId, period, total (BIGINT), currency, status, finalizedAt |
 | `InvoiceLine` | `LineId` | invoiceId, dimension, quantity, unitPrice, subtotal |
-| `PriceRule` | `PriceRuleId` | dimension, unitPrice (BIGINT, 分), currency, effective date |
+| `PriceRule` | `PriceRuleId` | dimension, unitPrice (BIGINT, cents), currency, effective date |
 | `Allocation` | `AllocationId` | invoiceId, costCenter, amount (BIGINT) |
 | `Budget` | `BudgetId` | tenantId (UNIQUE), limit (BIGINT), spent (BIGINT), threshold (NUMERIC) |
 
@@ -134,7 +134,7 @@ DDD four-layer architecture. Scheduled aggregation (Spring `@Scheduled`, externa
 | `RecordId`, `InvoiceId`, `PriceRuleId`, `BudgetId`, `AllocationId` | String | UUID format |
 | `TenantId` | String | Multi-tenant isolation key |
 | `UsageDimension` | Enum | `TOKEN_INPUT`, `TOKEN_OUTPUT`, `GPU_HOUR`, `VECTOR_COUNT`, `API_CALL`, `AGENT_RUN` |
-| `Money` | Record(long amount, String currency) | `amount` in smallest currency unit (分); `currency` default "CNY"; amount >= 0 |
+| `Money` | Record(long amount, String currency) | `amount` in smallest currency unit (cents); `currency` default "CNY"; amount >= 0 |
 | `Period` | String | `2026-07` (monthly) or `2026-07-17` (daily) |
 | `InvoiceStatus` | Enum | `DRAFT` → `FINALIZED` → `SENT` (immutable after FINALIZED) |
 | `AlertThreshold` | BigDecimal | Range (0.0, 1.0]; default 0.8 |
@@ -152,7 +152,7 @@ DDD four-layer architecture. Scheduled aggregation (Spring `@Scheduled`, externa
 
 | Domain Service | Responsibility | Key Rule |
 | --- | --- | --- |
-| `PricingEngine` | Compute cost: `amount × unitPrice` by dimension | Price table configurable and versioned; unit prices in 分 |
+| `PricingEngine` | Compute cost: `amount × unitPrice` by dimension | Price table configurable and versioned; unit prices in cents |
 | `AggregationRule` | Aggregate usage by `tenant × app × model × dimension` | Metering always on; settlement only multi-tenant |
 | `BudgetGuard` | Two-tier budget check: alert threshold, hard limit | Alert at 80% (default); circuit-break at 100% |
 | `ChargebackRule` | Allocate invoice total by `costCenter`/`department` ratios | Showback (visibility) + Chargeback (internal settlement) |
@@ -217,10 +217,10 @@ BudgetGuard.check(budget)
 | Valkey | External OSS | 7.2.0 | BSD-3 | optional | CachePort |
 | PostgreSQL | External OSS | 16.0 | PostgreSQL | core base | — (direct JPA) |
 | OpenCost | External OSS | — | Apache-2.0 | core | CostSourcePort |
-| ai-gateway-core | Internal (Go) | v1.4.0 | internal | core | MeteringPort |
-| Metering Service | Internal (Go) | v1.4.0 | internal | core | MeteringPort |
-| ai-platform-api | Internal (Java) | v1.4.0 | internal | core | QuotaControlPort |
-| ai-admin-service | Internal (Java) | v1.4.0 | internal | core | CostPort |
+| ai-gateway-core | Internal (Go) | v1.0.0 | internal | core | MeteringPort |
+| Metering Service | Internal (Go) | v1.0.0 | internal | core | MeteringPort |
+| ai-platform-api | Internal (Java) | v1.0.0 | internal | core | QuotaControlPort |
+| ai-admin-service | Internal (Java) | v1.0.0 | internal | core | CostPort |
 | Capsule | External OSS | 1.9.0 | Apache-2.0 | prerequisite | — (indirect, via multitenancy) |
 
 ---
@@ -230,7 +230,7 @@ BudgetGuard.check(budget)
 | # | Decision | Rationale | Impact |
 | --- | --- | --- | --- |
 | ADR-1 | Only deployed when `multitenancy.enabled=true` | Starter/standard are single-tenant; billing is meaningless without multi-tenant cost allocation. | Service is not even present in starter/standard profiles (`optional_disabled`). |
-| ADR-2 | Money stored as `BIGINT` in smallest currency unit (分) | Avoids floating-point precision errors in financial computation. Industry standard for billing systems. | All monetary math must use integer arithmetic; display layer converts to yuan. |
+| ADR-2 | Money stored as `BIGINT` in smallest currency unit (cents) | Avoids floating-point precision errors in financial computation. Industry standard for billing systems. | All monetary math must use integer arithmetic; display layer converts to yuan. |
 | ADR-3 | Async metering ingestion + scheduled aggregation | Decouples real-time metering from batch billing; tolerates metering backpressure without affecting agent execution. | Metering events may have up to 5-min SLA delay before appearing in cost view. |
 | ADR-4 | Two-tier budget: alert (80%) + circuit-break (100%) | Early warning gives admin time to adjust budget; hard cut-off prevents unbounded cost. | Budget threshold and limit are configurable per tenant. |
 | ADR-5 | Multi-source cost aggregation (gateway + OpenCost) | Token/API costs from gateway; K8s resource costs from OpenCost. Unified by tenant for complete cost picture. | Two independent data sources; need consistent `tenant_id` mapping across both. |
@@ -298,7 +298,7 @@ BudgetGuard.check(budget)
 ---
 
 > **References**:
-> - Full design: `design/DESIGN.md` (16 sections)
-> - Architecture framework: `../../OpenStrata架构设计文档 v2.8.md` §8, §4.7.2, §10.4, §15.6, §16
+> - Full design: `docs/DESIGN.md` (16 sections)
+> - Architecture framework: `../../OpenStrata architecture design document v2.8.md` §8, §4.7.2, §10.4, §15.5, §16
 > - Price engine details: §4.7.2 (internal transfer pricing table)
 > - Dependency validation: §12.4 (`billing` → `multitenancy` → `auth`)
