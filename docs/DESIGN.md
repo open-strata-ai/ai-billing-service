@@ -205,7 +205,7 @@ GET    /api/v1/price-rules                          #Current pricing table
   "code": "BILLING_REQUIRES_MULTITENANCY",
   "message": "The billing service is only enabled in multi-tenancy (advanced/full), please turn on multitenancy first",
   "traceId": "fa11ed",
-  "doc": "https://docs.openstrata.io/errors/BILLING_REQUIRES_MULTITENANCY"
+  "doc": "https://docs.openstrata.cc/errors/BILLING_REQUIRES_MULTITENANCY"
 }
 ```
 

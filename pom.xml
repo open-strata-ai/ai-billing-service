@@ -9,7 +9,7 @@
     <version>3.3.2</version>
     <relativePath/>
   </parent>
-  <groupId>com.openstrata</groupId>
+  <groupId>cc.openstrata</groupId>
   <artifactId>ai-billing-service</artifactId>
   <version>1.0.0</version>
   <properties>
