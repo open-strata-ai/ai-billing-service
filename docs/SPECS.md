@@ -50,7 +50,7 @@
   "code": "BILLING_REQUIRES_MULTITENANCY",
   "message": "Billing service only enabled in multi-tenant (advanced/full) mode. Enable multitenancy first.",
   "traceId": "fa11ed",
-  "doc": "https://docs.openstrata.io/errors/BILLING_REQUIRES_MULTITENANCY"
+  "doc": "https://docs.openstrata.cc/errors/BILLING_REQUIRES_MULTITENANCY"
 }
 ```
 
