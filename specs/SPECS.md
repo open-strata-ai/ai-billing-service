@@ -78,7 +78,7 @@
 | Schema | `billing` (shared) |
 | Multi-tenant isolation | `tenant_id` column + RLS (§8.2) |
 | ORM | JPA (Hibernate 6 / Jakarta Persistence) |
-| Money storage | `BIGINT` in smallest currency unit (分); no JSONB for money |
+| Money storage | `BIGINT` in smallest currency unit (cents); no JSONB for money |
 | Migration | Flyway (`V1__billing_init.sql`, `V2__rls.sql`) |
 
 ### 2.2 Table DDL
@@ -100,7 +100,7 @@ CREATE INDEX idx_usage_tenant_day ON usage_records(tenant_id, occurred_at);
 CREATE TABLE price_rules (
   rule_id    VARCHAR(64) PRIMARY KEY,
   dimension  VARCHAR(24) NOT NULL,
-  unit_price BIGINT      NOT NULL,        -- smallest currency unit (分)
+  unit_price BIGINT      NOT NULL,        -- smallest currency unit (point)
   currency   VARCHAR(8)  NOT NULL DEFAULT 'CNY',
   effective  TIMESTAMPTZ NOT NULL
 );
@@ -149,7 +149,7 @@ CREATE TABLE budgets (
 | Entity | Table | Notes |
 | --- | --- | --- |
 | `UsageRecordEntity` | `usage_records` | Idempotent by `record_id` |
-| `PriceRuleEntity` | `price_rules` | `unit_price` is `BIGINT` (分) |
+| `PriceRuleEntity` | `price_rules` | `unit_price` is `BIGINT` (points) |
 | `InvoiceEntity` | `invoices` | Immutable after `FINALIZED` |
 | `InvoiceLineEntity` | `invoice_lines` | References `invoices` |
 | `AllocationEntity` | `allocations` | References `invoices` |
@@ -183,7 +183,7 @@ openstrata:
       threshold: 0.8
     showback:
       enabled: true               # department allocation
-  pricing:                        # internal transfer prices (in smallest unit, e.g., 分)
+  pricing:                        #internal transfer prices (in smallest unit, e.g., cents)
     token_input:  2               # per 1M tokens
     token_output: 6
     gpu_hour:     15              # A100 80G
@@ -215,8 +215,8 @@ openstrata:
 | `openstrata.features.budgetAlert.enabled` | bool | `true` | advanced/full | Enable budget alerting |
 | `openstrata.features.budgetAlert.threshold` | float | `0.8` | advanced/full | Alert threshold ratio |
 | `openstrata.features.showback.enabled` | bool | `true` | advanced/full | Enable Showback/Chargeback |
-| `openstrata.pricing.token_input` | int | `2` | advanced/full | Token input price (分/1M) |
-| `openstrata.pricing.token_output` | int | `6` | advanced/full | Token output price (分/1M) |
+| `openstrata.pricing.token_input` | int | `2` | advanced/full | Token input price (min/1M) |
+| `openstrata.pricing.token_output` | int | `6` | advanced/full | Token output price (min/1M) |
 | `openstrata.pricing.gpu_hour` | int | `15` | advanced/full | GPU hourly price (A100 80G) |
 | `openstrata.pricing.vector_1m` | float | `0.5` | advanced/full | Vector price (per 1M) |
 | `openstrata.pricing.doc_gb` | float | `0.1` | advanced/full | Document storage price (per GB) |

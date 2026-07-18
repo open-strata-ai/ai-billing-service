@@ -37,14 +37,14 @@ public class BillingMultitenancyRule {
 | Aspect | Detail |
 | --- | --- |
 | **Trigger** | Aggregating usage into cost during invoice generation. |
-| **Constraint** | Pricing is computed as: `cost = UsageDimension × PriceRule.unitPrice`. Reference rates (§4.7.2): Token ¥2/M input, ¥6/M output; GPU ¥15/h A100; Vector ¥0.5/1M; Document ¥0.1/GB; API ¥0.5/10K. Price table is configurable and versioned. Money is stored in smallest currency unit (分). |
+| **Constraint** | Pricing is computed as: `cost = UsageDimension × PriceRule.unitPrice`. Reference rates (§4.7.2): Token ¥2/M input, ¥6/M output; GPU ¥15/h A100; Vector ¥0.5/1M; Document ¥0.1/GB; API ¥0.5/10K. Price table is configurable and versioned. Money is stored in smallest currency unit (cents). |
 | **Rationale** | Internal transfer pricing for cost allocation, not external billing. Configurable to support different pricing tiers. |
 
 **Implementation pattern**:
 ```java
 // Domain service: PricingEngine
 public Money calculatePrice(UsageRecord record, PriceRule rule) {
-    long unitPrice = rule.getUnitPrice();  // in 分 (smallest unit)
+    long unitPrice = rule.getUnitPrice();  //in minutes (smallest unit)
     long total = record.getAmount() * unitPrice;
     return new Money(total, rule.getCurrency());
 }
@@ -130,7 +130,7 @@ public List<Allocation> allocate(Invoice invoice, Map<String, Double> ratios) {
 | Aspect | Detail |
 | --- | --- |
 | **Trigger** | Any price computation or storage of monetary values. |
-| **Constraint** | ALL monetary amounts MUST be stored as `BIGINT` in the smallest currency unit (分 for CNY). NEVER use `FLOAT` or `DOUBLE` for money. The `Money` value object enforces this: amount is `long`, currency is `VARCHAR(8)` (default `CNY`). |
+| **Constraint** | ALL monetary amounts MUST be stored as `BIGINT` in the smallest currency unit (cents for CNY). NEVER use `FLOAT` or `DOUBLE` for money. The `Money` value object enforces this: amount is `long`, currency is `VARCHAR(8)` (default `CNY`). |
 | **Rationale** | Avoids floating-point rounding errors; financial industry standard practice. |
 
 **Implementation pattern**:
