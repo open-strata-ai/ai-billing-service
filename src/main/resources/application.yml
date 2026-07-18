@@ -1,0 +1,42 @@
+openstrata:
+  service:
+    port: 8084
+  features:
+    billing:
+      enabled: true
+    budget-alert:
+      enabled: true
+      threshold: 0.8
+    showback:
+      enabled: true
+    dev-mode:
+      enabled: false
+  pricing:
+    token_input: 2
+    token_output: 6
+    gpu_hour: 15
+    vector_1m: 0.5
+    doc_gb: 0.1
+    api_10k: 0.5
+  spi:
+    auth: keycloak
+    cache: redis
+    metering:
+      - ai-gateway-core
+      - opencost
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/billing
+    username: billing
+    password: billing
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
