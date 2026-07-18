@@ -1,6 +1,6 @@
 # ADR-0005: Circuit breaker and quota linkage
 
-- **Status**: Pending Alignment
+- **Status**: Accepted — see R-003 in `openstrata-meta/contracts/adr-resolutions.md`
 - **Date**: 2026-07-17
 - **Suggested by**: OpenStrata Architecture Group
 - **Repository**: ai-billing-service
@@ -48,7 +48,7 @@ This ADR solidifies "circuit breaker and quota linkage" into an architectural de
 - Associated architecture documents §8.2 (as a basis for decision-making and a source of consistency verification).
 - Associated architecture documents §8.3 (as a basis for decision-making and a source of consistency verification).
 - Associated architecture documents §9.2 (as a basis for decision-making and a source of consistency verification).
-- Solidify the decision before the review at the corresponding stage, and write the final conclusion back into this ADR (the status is changed from "Pending" to "Adopted").
+- **Resolution (R-003)**: Accepted — the `BudgetExceeded → Quota circuit breaker` trips on tenant-level QPS with an application-level (global) ceiling as backstop; both thresholds are configuration-driven. See `openstrata-meta/contracts/adr-resolutions.md`.
 
 ## Traceback
 
