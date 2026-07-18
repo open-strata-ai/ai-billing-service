@@ -1,6 +1,6 @@
 # ai-billing-service · Architecture Decision Document (ARCH)
 
-> **Source**: Extracted from `design/DESIGN.md` §1, §2, §3, §6. Full design doc is the authority; this distillate captures architectural decisions, constraints, and SPI boundaries for implementers.
+> **Source**: Extracted from `docs/DESIGN.md` §1, §2, §3, §6. Full design doc is the authority; this distillate captures architectural decisions, constraints, and SPI boundaries for implementers.
 
 ---
 
@@ -298,7 +298,7 @@ BudgetGuard.check(budget)
 ---
 
 > **References**:
-> - Full design: `design/DESIGN.md` (16 sections)
+> - Full design: `docs/DESIGN.md` (16 sections)
 > - Architecture framework: `../../OpenStrata architecture design document v2.8.md` §8, §4.7.2, §10.4, §15.5, §16
 > - Price engine details: §4.7.2 (internal transfer pricing table)
 > - Dependency validation: §12.4 (`billing` → `multitenancy` → `auth`)

@@ -1,6 +1,6 @@
 # ai-billing-service · Formal Specification (SPECS)
 
-> **Source**: Extracted from `design/DESIGN.md` §7 (API Contract), §8 (Data Model), §10 (Configuration). This is the machine-consumable spec; the design doc is the human-facing authority.
+> **Source**: Extracted from `docs/DESIGN.md` §7 (API Contract), §8 (Data Model), §10 (Configuration). This is the machine-consumable spec; the design doc is the human-facing authority.
 
 ---
 
@@ -236,4 +236,4 @@ openstrata:
 
 ---
 
-> **References**: API details in `design/DESIGN.md` §7. Data model DDL in §8. Profile configuration in §10. Full OpenAPI spec auto-generated at build time.
+> **References**: API details in `docs/DESIGN.md` §7. Data model DDL in §8. Profile configuration in §10. Full OpenAPI spec auto-generated at build time.

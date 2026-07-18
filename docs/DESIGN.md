@@ -10,7 +10,7 @@
 > | Platform version | v1.0.0 |
 > | Document Status | Draft |
 > | Responsible person | OpenStrata Architecture Group |
-> | Related links | [arch](./arch/ARCH.md) · [skills](./skills/SKILLS.md) · [specs](./specs/SPECS.md) · Architecture document [§8](../../OpenStrata architecture design document v2.8.md) [§4.7.2](../../OpenStrata architecture design document v2.8.md) [§10.4](../../OpenStrata Architecture Design Document v2.8.md) [§15.5](../../OpenStrata Architecture Design Document v2.8.md) [§16](../../OpenStrata Architecture Design Document v2.8.md) |
+> | Related links | [arch](./ARCH.md) · [skills](./SKILLS.md) · [specs](./SPECS.md) · Architecture document [§8](../../OpenStrata architecture design document v2.8.md) [§4.7.2](../../OpenStrata architecture design document v2.8.md) [§10.4](../../OpenStrata Architecture Design Document v2.8.md) [§15.5](../../OpenStrata Architecture Design Document v2.8.md) [§16](../../OpenStrata Architecture Design Document v2.8.md) |
 
 > This document covers the existing placeholder skeleton and does not change `arch/`, `skills/`, `specs/`, `README.md`. Chapters are strictly organized into 16 sections, and figures are always represented by live ```mermaid```.
 
