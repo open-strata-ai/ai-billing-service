@@ -7,7 +7,7 @@
 > | Language · Framework | Java · Spring Boot 3.x (Jakarta Persistence, §15.5.1) |
 > | Domain | control-plane |
 > | optional | yes (optional, **only multi-tenant enabled**: advanced/full profile, see `repos.yaml` / `profiles/advanced.yaml`) |
-> | Platform version | v1.4.0 |
+> | Platform version | v1.0.0 |
 > | Document Status | Draft |
 > | Responsible person | OpenStrata Architecture Group |
 > | Related links | [arch](./arch/ARCH.md) · [skills](./skills/SKILLS.md) · [specs](./specs/SPECS.md) · Architecture document [§8](../../OpenStrata architecture design document v2.8.md) [§4.7.2](../../OpenStrata architecture design document v2.8.md) [§10.4](../../OpenStrata Architecture Design Document v2.8.md) [§15.5](../../OpenStrata Architecture Design Document v2.8.md) [§16](../../OpenStrata Architecture Design Document v2.8.md) |
@@ -376,10 +376,10 @@ openstrata:
 | Redis / Valkey | External OSS (Cache SPI) | redis@7.4.0 ✅ / valkey@7.2.0 optional | Cache (§16.3) |
 | PostgreSQL | base base | postgresql@16.0 ✅ core | persistence |
 | OpenCost | External OSS (cost collection) | Reference §4.7.2 Cost collection | K8s resource cost |
-| ai-gateway-core | Internal services | Go v1.4.0 | Token/API metering (§4.7.2) |
-| Metering Service (Go) | Internal Services | Go v1.4.0 | Real-time Collection (§4.7.2) |
-| ai-platform-api | Internal services | Java v1.4.0 | Quota circuit breaker linkage (§8.2) |
-| ai-admin-service | Internal service | Java v1.4.0 | Cost dashboard (§14.4/§14.5) |
+| ai-gateway-core | Internal services | Go v1.0.0 | Token/API metering (§4.7.2) |
+| Metering Service (Go) | Internal Services | Go v1.0.0 | Real-time Collection (§4.7.2) |
+| ai-platform-api | Internal services | Java v1.0.0 | Quota circuit breaker linkage (§8.2) |
+| ai-admin-service | Internal service | Java v1.0.0 | Cost dashboard (§14.4/§14.5) |
 | Capsule | External OSS (MultiTenancy SPI) | capsule@1.9.0 optional | Multi-tenant prerequisite (§8.2) |
 
 ---
@@ -404,7 +404,7 @@ openstrata:
 
 ## 14. Deployment and elasticity (K8s resources/HPA/probes)
 
-- **Deployment**: `ai-billing-service`, stateless (aggregated calculations), 2 replicas; deployed in advanced/full only; mirrors `openstrata/ai-billing-service:v1.4.0`.
+- **Deployment**: `ai-billing-service`, stateless (aggregated calculations), 2 replicas; deployed in advanced/full only; mirrors `openstrata/ai-billing-service:v1.0.0`.
 - **Namespace**: Shared `ai-system` (§9.2); dependency `ai-tenant-*` already exists.
 - **Probe**:
   - liveness：`GET /actuator/health/liveness`

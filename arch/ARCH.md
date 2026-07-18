@@ -12,7 +12,7 @@
 | Language / Framework | Java · Spring Boot 3.x (Jakarta Persistence) |
 | Optional | Yes — optional, **only multi-tenant**: enabled in advanced/full profiles |
 | Default Port | 8084 |
-| Platform Version | v1.4.0 |
+| Platform Version | v1.0.0 |
 | Deployment | 2 replicas (only advanced/full), `ai-system` namespace, 500m CPU / 1Gi request |
 | Database | PostgreSQL@16.0 (core base), schema `billing` |
 | Prerequisite | `multitenancy.enabled=true` (§12.4: `billing` → `multitenancy` → `auth`) |
@@ -217,10 +217,10 @@ BudgetGuard.check(budget)
 | Valkey | External OSS | 7.2.0 | BSD-3 | optional | CachePort |
 | PostgreSQL | External OSS | 16.0 | PostgreSQL | core base | — (direct JPA) |
 | OpenCost | External OSS | — | Apache-2.0 | core | CostSourcePort |
-| ai-gateway-core | Internal (Go) | v1.4.0 | internal | core | MeteringPort |
-| Metering Service | Internal (Go) | v1.4.0 | internal | core | MeteringPort |
-| ai-platform-api | Internal (Java) | v1.4.0 | internal | core | QuotaControlPort |
-| ai-admin-service | Internal (Java) | v1.4.0 | internal | core | CostPort |
+| ai-gateway-core | Internal (Go) | v1.0.0 | internal | core | MeteringPort |
+| Metering Service | Internal (Go) | v1.0.0 | internal | core | MeteringPort |
+| ai-platform-api | Internal (Java) | v1.0.0 | internal | core | QuotaControlPort |
+| ai-admin-service | Internal (Java) | v1.0.0 | internal | core | CostPort |
 | Capsule | External OSS | 1.9.0 | Apache-2.0 | prerequisite | — (indirect, via multitenancy) |
 
 ---
