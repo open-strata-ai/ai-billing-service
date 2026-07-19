@@ -60,28 +60,3 @@ spring:
     redis:
       host: ${REDIS_HOST:redis}
       port: ${REDIS_PORT:6379}
-
----
-spring:
-  config:
-    activate:
-      on-profile: offline
-  # Offline profile: boot with an embedded H2 datasource so the service runs
-  # with no external Postgres/Redis (parity with ai-admin-service).
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
-  datasource:
-    url: jdbc:h2:mem:billing;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-    username: sa
-    password: ""
-    driver-class-name: org.h2.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-  flyway:
-    enabled: false

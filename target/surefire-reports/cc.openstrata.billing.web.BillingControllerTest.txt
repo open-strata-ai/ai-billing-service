@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cc.openstrata.billing.web.BillingControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.938 s -- in cc.openstrata.billing.web.BillingControllerTest
