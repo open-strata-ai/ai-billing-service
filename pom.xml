@@ -70,11 +70,15 @@
       <version>5.23.0</version>
       <scope>test</scope>
     </dependency>
+    <!-- byte-buddy is also required at RUNTIME by Hibernate (prod + offline JPA
+         profiles). Scope must not be `test` or the fat jar boots with
+         NoClassDefFoundError: net/bytebuddy/... (does not occur on JDK 21 image,
+         but is required for local JDK 26 builds). Mirrors ai-admin-service. -->
     <dependency>
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy</artifactId>
       <version>1.18.10</version>
-      <scope>test</scope>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>net.bytebuddy</groupId>
