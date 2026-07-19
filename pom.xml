@@ -42,6 +42,11 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
+    <!-- Spring Data Redis for production cache adapter -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
     <!-- Offline test DB: H2 in-memory backs JPA so `mvn test` needs no live PostgreSQL. -->
     <dependency>
       <groupId>com.h2database</groupId>
