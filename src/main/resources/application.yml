@@ -56,6 +56,10 @@ spring:
     url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/billing}
     username: ${DATABASE_USER:billing}
     password: ${DATABASE_PASSWORD:billing}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   data:
     redis:
       host: ${REDIS_HOST:redis}
