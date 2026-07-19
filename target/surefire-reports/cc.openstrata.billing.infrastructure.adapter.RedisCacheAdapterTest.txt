@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cc.openstrata.billing.infrastructure.adapter.RedisCacheAdapterTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.423 s -- in cc.openstrata.billing.infrastructure.adapter.RedisCacheAdapterTest

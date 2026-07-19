@@ -6,4 +6,5 @@
 /Users/weiping/Code/openstrata/ai-billing-service/src/test/java/cc/openstrata/billing/domain/service/BudgetGuardTest.java
 /Users/weiping/Code/openstrata/ai-billing-service/src/test/java/cc/openstrata/billing/domain/service/ChargebackRuleTest.java
 /Users/weiping/Code/openstrata/ai-billing-service/src/test/java/cc/openstrata/billing/domain/service/PricingEngineTest.java
+/Users/weiping/Code/openstrata/ai-billing-service/src/test/java/cc/openstrata/billing/infrastructure/adapter/RedisCacheAdapterTest.java
 /Users/weiping/Code/openstrata/ai-billing-service/src/test/java/cc/openstrata/billing/web/BillingControllerTest.java
