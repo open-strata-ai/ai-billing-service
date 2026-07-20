@@ -1,0 +1,130 @@
+{
+  "groups": [
+    {
+      "name": "openstrata",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties"
+    },
+    {
+      "name": "openstrata.features",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Features",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Features getFeatures() "
+    },
+    {
+      "name": "openstrata.features.budget-alert",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Features$BudgetAlert",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Features.BudgetAlert getBudgetAlert() "
+    },
+    {
+      "name": "openstrata.features.dev-mode",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Features$DevMode",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Features.DevMode getDevMode() "
+    },
+    {
+      "name": "openstrata.features.showback",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Features$Showback",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Features.Showback getShowback() "
+    },
+    {
+      "name": "openstrata.pricing",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Pricing",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Pricing getPricing() "
+    },
+    {
+      "name": "openstrata.service",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Service",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Service getService() "
+    },
+    {
+      "name": "openstrata.spi",
+      "type": "cc.openstrata.billing.config.OpenstrataProperties$Spi",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties",
+      "sourceMethod": "public cc.openstrata.billing.config.OpenstrataProperties.Spi getSpi() "
+    }
+  ],
+  "properties": [
+    {
+      "name": "openstrata.features.billing-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Billing only enabled when multitenancy is on (ARCH §2.2).",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features"
+    },
+    {
+      "name": "openstrata.features.budget-alert.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features$BudgetAlert"
+    },
+    {
+      "name": "openstrata.features.budget-alert.threshold",
+      "type": "java.lang.Double",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features$BudgetAlert"
+    },
+    {
+      "name": "openstrata.features.dev-mode.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features$DevMode"
+    },
+    {
+      "name": "openstrata.features.showback.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Features$Showback"
+    },
+    {
+      "name": "openstrata.pricing.api10k",
+      "type": "java.lang.Double",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.pricing.doc-gb",
+      "type": "java.lang.Double",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.pricing.gpu-hour",
+      "type": "java.lang.Integer",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.pricing.token-input",
+      "type": "java.lang.Integer",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.pricing.token-output",
+      "type": "java.lang.Integer",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.pricing.vector1m",
+      "type": "java.lang.Double",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Pricing"
+    },
+    {
+      "name": "openstrata.service.port",
+      "type": "java.lang.Integer",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Service"
+    },
+    {
+      "name": "openstrata.spi.auth",
+      "type": "java.lang.String",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Spi"
+    },
+    {
+      "name": "openstrata.spi.cache",
+      "type": "java.lang.String",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Spi"
+    },
+    {
+      "name": "openstrata.spi.metering",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "cc.openstrata.billing.config.OpenstrataProperties$Spi"
+    }
+  ],
+  "hints": []
+}

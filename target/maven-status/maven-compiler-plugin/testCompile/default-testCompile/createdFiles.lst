@@ -1,0 +1,11 @@
+cc/openstrata/billing/domain/service/PricingEngineTest.class
+cc/openstrata/billing/application/InvoiceAppServiceTest.class
+cc/openstrata/billing/domain/service/ChargebackRuleTest.class
+cc/openstrata/billing/domain/service/BillingMultitenancyRuleTest.class
+cc/openstrata/billing/BillingServiceApplicationTests.class
+cc/openstrata/billing/web/BillingControllerTest.class
+cc/openstrata/billing/application/BudgetAppServiceTest.class
+cc/openstrata/billing/domain/service/BudgetGuardTest$FakeQuota.class
+cc/openstrata/billing/domain/service/BudgetGuardTest.class
+cc/openstrata/billing/application/MeteringIngestAppServiceTest.class
+cc/openstrata/billing/domain/service/BudgetGuardTest$FakeNotify.class
